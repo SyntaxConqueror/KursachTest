@@ -1,0 +1,57 @@
+.tweet__content {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.tweet__item {
+    display: flex;
+    gap: 1em;
+    padding: .5em 1em;
+    background-color: white;
+}
+
+.tweet__author {
+    display: flex;
+    gap: .3em;
+}
+
+.tweet__author > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgba(133, 133, 133, .5);
+}
+
+.tweet__text {
+    text-align: justify;
+}
+.reducedTweet_text {
+    text-align: justify;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tweet__actions{
+    margin-top: 10px;
+    display: flex;
+}
+.tweet__actions > * {
+    width: 100%;
+    display: flex;
+    gap: .2em;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+.tweet__actions > *:hover {
+    color: cornflowerblue;
+}
+
+.tweet__actions > div > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

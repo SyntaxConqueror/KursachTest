@@ -1,0 +1,42 @@
+.home__container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-top: .2em;
+}
+
+.tweet__component{
+    display: flex;
+    background-color: white;
+    padding: .5em 1em;
+    gap: 1em;
+
+}
+
+.avatar {
+    padding-top: .5em;
+}
+
+.post {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post__text__field > div {
+    width: 100%;
+
+}
+
+.tweet__btn {
+    display: flex;
+    align-items: flex-end;
+}
+
+.home__unauthorized {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

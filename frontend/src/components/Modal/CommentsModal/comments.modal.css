@@ -1,0 +1,67 @@
+.commentsModal__body {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    margin: 1em 0;
+}
+
+.comments__list{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: .5em;
+
+}
+
+.comments__list::-webkit-scrollbar {
+    width: 1px;
+}
+
+.tweet__author {
+    display: flex;
+    gap: .3em;
+}
+
+.tweet__author > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgba(133, 133, 133, .5);
+}
+
+.user{
+    display: flex;
+    gap: .5em;
+}
+
+.comments__list::-webkit-scrollbar-thumb {
+    background-color: rgba(108, 108, 108, 0.5);
+    border-radius: 5px;
+}
+
+
+.commentContent__input > div {
+    width: 100%;
+}
+.commentContent__input {
+    width: 100%;
+    padding: .5em 1em ;
+}
+
+form{
+    display: flex;
+    width: 100%;
+    margin-bottom: .5em;
+}
+
+.submit__btn {
+    padding: .5em .5em .5em 0;
+    display: flex;
+    align-items: flex-end;
+}

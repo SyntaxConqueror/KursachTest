@@ -1,0 +1,40 @@
+.search__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 50%;
+    padding: .5em;
+}
+
+
+.search__field > div {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.trends {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: rgba(129, 129, 129, .12);
+    padding: .5em;
+    border-radius: 10px;
+}
+
+.trends > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.trends__header {
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1000px) {
+    .search__container {
+        display: none;
+
+    }
+}
