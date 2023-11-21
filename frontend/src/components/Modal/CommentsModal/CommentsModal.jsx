@@ -17,6 +17,7 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord.js";
 import SendIcon from '@mui/icons-material/Send';
 import {AuthContext} from "../../../App.jsx";
 import axios from "axios";
+import {emitter} from "../../Content/Home/Home.jsx";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -50,6 +51,7 @@ export const CommentsModal = ({open, setOpen, comments, setComments, post_id, se
                     ...prevCounters,
                     comments: prevCounters.comments + 1,
                 }));
+                emitter.emit('tweetDataSet')
             })
             .catch((error)=>{
                 console.log(error);

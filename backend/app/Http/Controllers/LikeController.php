@@ -14,16 +14,20 @@ class LikeController extends Controller
             ->where('user_id', $request->user_id)
             ->first();
 
+        $post = Post::where('id', $request->post_id)->withCount('likes')->get();
+
         if ($like) {
             $like->delete();
             return response()->json([
                 'action' => 'removed',
+                'post' => $post[0],
                 'message' => 'Like removed successfully'
             ]);
         } else {
             Like::create( ['user_id'=>$request->user_id, 'post_id'=>$request->post_id] );
             return response()->json([
                 'action' => 'added',
+                'post' => $post[0],
                 'message' => 'Like added successfully'
             ]);
         }

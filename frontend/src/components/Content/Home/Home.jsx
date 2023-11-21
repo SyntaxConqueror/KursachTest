@@ -5,8 +5,10 @@ import {TweetsList} from "./TweetsList/TweetsList.jsx";
 import {AuthContext} from "../../../App.jsx";
 import axios from "axios";
 import {EventModal} from "../../Modal/EventModal.jsx";
+import EventEmitter2 from "eventemitter2";
 
 export const UserDataContext = createContext({});
+export const emitter = new EventEmitter2()
 export const Home = () => {
 
     const { user } = useContext(AuthContext);
@@ -23,13 +25,16 @@ export const Home = () => {
     const headers = {Authorization: `Bearer ${localStorage.getItem('jwtToken')}`}
     
     const getUserPosts = () => {
+
         axios.get(`http://127.0.0.1:8000/api/getUserPosts/${user.id}?page=${page}`, {headers})
             .then((response)=>{
                 setUserPosts(response.data);
+                console.log(response.data);
             }).catch((error)=>{
                 console.log(error);
             })
     }
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -53,7 +58,12 @@ export const Home = () => {
 
 
     useEffect(()=> {
+        emitter.on('tweetDataSet', getUserPosts);
         if(user) getUserPosts();
+
+        return () => {
+            emitter.off('databaseUpdate', getUserPosts);
+        };
     }, [user])
 
     return user

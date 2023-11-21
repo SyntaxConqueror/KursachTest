@@ -10,10 +10,12 @@ import axios from "axios";
 import {EventModal} from "../../../../Modal/EventModal.jsx";
 import {AuthContext} from "../../../../../App.jsx";
 import {CommentsModal} from "../../../../Modal/CommentsModal/CommentsModal.jsx";
+import {emitter} from "../../Home.jsx";
+import {exploreEmitter} from "../../../Explore/Explore.jsx";
+import {parseJSON} from "date-fns";
 
 
-
-export const TweetItem = ({reduced, tweetData, setTweetsList}) => {
+export const TweetItem = ({setLike, reduced, tweetData, setTweetsList}) => {
 
     const {user} = useContext(AuthContext);
     const [counters, setCounters] = useState({
@@ -43,6 +45,7 @@ export const TweetItem = ({reduced, tweetData, setTweetsList}) => {
     };
 
     const getComments = () => {
+
         const headers = {}
         headers.Authorization = `Bearer ${localStorage.getItem('jwtToken')}`
         axios.get(`http://127.0.0.1:8000/api/getComments/${tweetData?.id}`, {headers})
@@ -57,6 +60,7 @@ export const TweetItem = ({reduced, tweetData, setTweetsList}) => {
             })
     }
 
+
     const handleClick = async (route) => {
 
         const formData = new FormData();
@@ -69,6 +73,8 @@ export const TweetItem = ({reduced, tweetData, setTweetsList}) => {
 
         try {
             const response = await axios.post(`http://127.0.0.1:8000/api/${route}`, formData, { headers });
+            emitter.emit('tweetDataSet')
+            exploreEmitter.emit('exploreSet', response.data)
             return response.data;
         } catch (error) {
             setResponseMessage({title: "Error", content: `Some error occured! \n${error.response.data.message}`})
@@ -92,11 +98,6 @@ export const TweetItem = ({reduced, tweetData, setTweetsList}) => {
                 }
                 const response = await handleClick(property);
 
-                if (propertyToCounter[property]) {
-                    const updatedCounters = { ...counters };
-                    updatedCounters[propertyToCounter[property]] += response.action === 'added' ? 1 : -1;
-                    setCounters(updatedCounters);
-                }
             }}
             className={styles[property]}
         >
@@ -142,9 +143,9 @@ export const TweetItem = ({reduced, tweetData, setTweetsList}) => {
                     tweetData?.post
                         ? ""
                         : <div className={styles.tweet__actions}>
-                            {createActionButton("comment", <ChatBubbleOutlineIcon />, counters.comments)}
-                            {createActionButton("repost", <RepeatIcon />, counters.reposts)}
-                            {createActionButton("like", <FavoriteBorderIcon />, counters.likes, "cornflowerblue")}
+                            {createActionButton("comment", <ChatBubbleOutlineIcon />, tweetData?.comments_count)}
+                            {createActionButton("repost", <RepeatIcon />, tweetData?.reposts_count)}
+                            {createActionButton("like", <FavoriteBorderIcon />, tweetData?.likes_count, "cornflowerblue")}
                         </div>
                 }
                 <CommentsModal

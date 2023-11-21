@@ -42,6 +42,8 @@ export const LoginForm = () => {
         event.target.password.value = '';
     }
 
+    console.log(userAuthorized)
+
     return (
         <form onSubmit={handleSubmit} className={styles.login__container}>
             <TextField name={"email"} id="filled-basic" label="Email" variant="filled" />
